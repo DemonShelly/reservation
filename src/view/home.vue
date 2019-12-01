@@ -1,26 +1,31 @@
 <template>
   <div>
-    <transition-group name='roomImg' tag='ul'>
-      <li class='containImg' v-for="(item,index) in getPreImg" :key="index" v-show='currentIndex==index'>
-        <img class='topImg' :src="item.imageUrl">
-      </li>
-    </transition-group>	
+      <transition-group name='roomImg' tag='ul'>
+        <li class='containImg' v-for="(item,index) in getPreImg" :key="index" v-show='currentIndex==index'>
+          <div class="filter"></div>
+          <img class='topImg' :src="item.imageUrl">
+        </li>
+      </transition-group>
     <div id='top'>
       <div id='logo'>
-        <div id='bottomLogo'></div>
+        <!-- <div id='bottomLogo'></div> -->
       </div>
-      <div id='MainLogo'>
+      <!-- <div id='MainLogo'>
         <div id='logoName'>
           <span class='top'>White</span>
           <span class='bottom'>Space</span>
         </div>
-      </div>
+      </div> -->
       <div id='info'>
-        <div class='socialMedia'></div>
+        <div class='socialMedia'>
+          <i class="igIcon"></i>
+          <i class="fbIcon"></i>
+        </div>
+        <div class="vl"></div>
         <div class='contactInfo'>
-          <div>02-17264937</div>
-          <div>whitespace@whitespace.com</div>
-          <div>台北市羅斯福路一段31號</div>
+          <div><i class="telIcon"></i>02-17264937</div>
+          <div><i class="emailIcon"></i>whitespace@whitespace.com</div>
+          <div><i class="addressIcon"></i>台北市羅斯福路一段31號</div>
         </div>
       </div>
        </div>
@@ -131,6 +136,14 @@
   height:660px;
   overflow: hidden;
 }
+.filter{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #000000;
+  filter: opacity(0.1);
+
+}
 .topImg{
 	background-size:cover;
 	/*height:660px;*/
@@ -147,37 +160,29 @@
   position:absolute;
   width:148px;
   height:148px;
-  background: repeating-linear-gradient(45deg, white 9px, white 10px, transparent 0, transparent 15px); 
+  /*background: repeating-linear-gradient(45deg, white 9px, white 10px, transparent 0, transparent 15px); */
   left:50%;
   top:155px;
   transform: translate(-50%,0%);
-}
-#bottomLogo{
-  width:100%;
-  height:100%;
-  background: rgba(255,255,255,0.28);
-}
-#MainLogo{
-  position:absolute;
-  width:148px;
-  height:148px;
-  background: rgba(255,255,255,0.30);
-  border: 2px solid #FFFFFF;
-  left:calc(50% - 17px);
-  top:170px;
-  transform:translate(-50%, 0%);  
+  background: url(../assets/logo_white.svg) no-repeat center center;
+  background-size: cover;
+  width: 165px;
+  height: 165px;
 }
 #logoName{
   font-family: NotoSansCJKtc-Medium;
-  font-size: 31px;
-  color: #FFFFFF;
-  letter-spacing: 3.24px;
-  line-height: 44px;
+  
   display:flex;
   flex-direction:column;
   left:27px;
   top:26px;
   position:relative;
+}
+#logoName>span{
+  font-size: 31px;
+  color: #FFFFFF;
+  letter-spacing: 3.24px;
+  line-height: 44px;
 }
 #info{
   position:absolute;
@@ -185,10 +190,59 @@
   top:368px;
   left:50%;
   transform:translate(-50%, 0%);
+  width: 28%;
+  display: flex;
+  justify-content: space-between;
+}
+.socialMedia{
+  display: block;
+  margin:auto 0;
+}
+.contactInfo{
+}
+.vl{
+  border-left: 1px solid #FFFFFF;
+  /*height: 10;*/
+}
+.igIcon {
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  background: url(../assets/instagram-brands.svg) no-repeat center center;
+  margin-right: 7px;
+}
+.fbIcon{
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  background: url(../assets/facebook-square-brands.svg) no-repeat center center;
+
+}
+.telIcon{
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  background: url(../assets/phone-alt-solid.svg) no-repeat center center;
+  margin-right: 20px;
+}
+.emailIcon{
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  background: url(../assets/envelope-solid.svg) no-repeat center center;
+  margin-right: 20px;
+}
+.addressIcon{
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  background: url(../assets/home-solid.svg) no-repeat center center;
+  margin-right: 20px;
 }
 
 .contactInfo>div{
-  margin-bottom:13px;
+  margin-top: 8px;
+  margin-bottom:14px;
 }
 
 

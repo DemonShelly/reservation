@@ -1,17 +1,11 @@
 <template>
-  <router-view/>
+  <router-view></router-view>
 </template>
 
 <script>
-// import Home from './view/home.vue'
-// import Information from './view/information.vue'
 
 export default {
-  name: 'App'
-  // components: {
-  //   Home,
-  //   Information
-  // }
+  name: 'App',
 }
 </script>
 

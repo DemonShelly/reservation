@@ -1,6 +1,6 @@
 <template>
-  <div id="app" v-if="getOb">
-    
+  <div id="app" v-if='getOb'>   
+    <div class="logoBlack" @click='backTo'></div>
     <div class="imgContainer">
         <img class='imgList' v-for='(url,index) in getOb.imageUrl' :src="url" :key="index" @click.prevent="toImgBox(index)">
     </div>
@@ -52,12 +52,12 @@
     </div>
     </div>
     <div class="calendar">
-      <HotelDatePicker :startDate='tomorrow' :endDate='endDate' :disabledDates="getBooking" :key='getBookingLength' >
+      <HotelDatePicker :startDate='tomorrow' :endDate='endDate' :disabledDates="getBooking" :enableCheckout="true" :key='getBookingLength' >
       </HotelDatePicker>
       <div class="reservation" @click='reservation'><span>預約時段</span></div>
     </div>
   </div>
-    <router-view :key="$route.fullPath"></router-view>
+    <router-view></router-view>
   </div>
 
 </template>
@@ -66,10 +66,6 @@
 
   export default{
     name:'information',
-    data(){
-      return{
-      }
-    },
     components: {
       HotelDatePicker
     },
@@ -78,7 +74,8 @@
         return this.$store.getters.infoOb.booking.length
       },
       getOb () {
-        console.log(this.$store.getters.infoOb.room[0])
+        if (!this.$store.getters.infoOb) { return }
+        // console.log(this.$store.getters.infoOb.room[0])
         return this.$store.getters.infoOb.room[0]
       },
       getDescriptionShort(){
@@ -102,10 +99,17 @@
       }
     },
     methods: {
+      backTo(){
+        this.$router.push({name: 'home'})
+      },
       toImgBox(index) {
         this.$router.push({name:'imgbox',params:{imgIndex : index}})
       },
       reservation(){
+        if(this.$children[0].checkIn==null||this.$children[0].checkOut==null){
+          alert('請先選擇日期')
+          return
+        }
         let cid = new Date(this.$children[0].checkIn)
         let cod = new Date(this.$children[0].checkOut)
         let days = (cod-cid)/(1000 * 60 * 60 * 24)
@@ -151,7 +155,8 @@
           return 'holiday'
         }
         else return 'normalDay'
-      }
+      },
+      
     },
     mounted(){
       let loader = this.$loading.show()
@@ -161,16 +166,6 @@
       // console.log('thisRoom:'+this.$store.getters.infoOb.room[0])
 
     },
-    watch:{
-      // '$route'(to,from){
-      //   if(to.name === 'information' && from.name === 'success'){
-      //     console.log('check success!')
-      //     // this.$router.go()
-      //     console.log(this.getBooking)
-      //   }
-
-      // }
-    }
   
   }
 </script>
@@ -183,6 +178,17 @@
 }
 ul,li{
 	list-style-type: none;
+}
+.logoBlack{
+  cursor: pointer;
+  position: absolute;
+  left: 45px;
+  top:32px;
+  background: url(../assets/logo_block.svg) no-repeat center center;
+  background-size: cover;
+  width: 185px;
+  height:60px;
+  z-index:999;
 }
 .imgContainer{
 		height:450px;
@@ -380,7 +386,7 @@ ul,li{
     top:62px;
     width:380px;
     height: 400px;
-    background-color: lightgrey; 
+    /*background-color: lightgrey; */
   }
   .reservation{
     width: 120px;

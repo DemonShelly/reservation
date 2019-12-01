@@ -44,6 +44,8 @@ const store = new Vuex.Store({
   getters: {
     infoOb (state) {
       if (state.roomsArr.length === 0) { return }
+      // console.log(state.allRooms)
+      // console.log(state.roomsArr)
       const ob = state.roomsArr.filter((item) => {
         return state.enterRoom === item.room[0].name
       })
@@ -53,18 +55,18 @@ const store = new Vuex.Store({
   mutations: {
     putAllRooms (state, payload) {
       state.allRooms = payload
-      console.log(state.allRooms)
+      // console.log(state.allRooms)
     },
     putRooms (state, payload) {
       state.roomsArr = payload
-      console.log(state.roomsArr)
+      // console.log(state.roomsArr)
     },
     enterInfo(state, payload){
       state.enterRoom = payload
     },
     putReservation(state, payload){
       state.reservation = payload
-      console.log(state.reservation)
+      // console.log(state.reservation)
     },
     putStyle(state){
       for(let i=0 ; i<state.roomsArr.length ; i++){
@@ -101,7 +103,7 @@ const store = new Vuex.Store({
         switch (state.roomsArr[i].room[0].name) {
           case `Single Room`:
             state.preImgArr.push({
-              imageUrl: state.roomsArr[i].room[0].imageUrl[2],
+              imageUrl: state.roomsArr[i].room[0].imageUrl[1],
               name: state.roomsArr[i].room[0].name
             })
             break

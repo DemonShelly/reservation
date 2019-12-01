@@ -57,18 +57,15 @@
           this.$store.state.config)
           .then((response)=>{
             console.log(response)
+            this.$store.dispatch('getAPI')
             this.$router.push({name:'success'})
           }).catch((error)=>{
             console.log(error)
             this.$router.push({name:'error'})
           })
         
-        console.log(this.customerInfo)
       }
     },
-    mounted(){
-      // console.log(this.$store.state.reservation.checkIn)
-    }
   }
 </script>
 <style>
